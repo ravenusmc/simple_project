@@ -1,0 +1,14 @@
+{
+  "name": "simple_project",
+  "version": "1.0.0",
+  "description": "A simple project working with Node/Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Mike Cuddy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
