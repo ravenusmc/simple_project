@@ -1,8 +1,25 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/simple_project');
+let db = mongoose.connection;
+
+//Check Connection
+db.once('open', function(){
+  console.log('connected to MONGO DB!!')
+});
+
+//Checking for DB errors
+db.on('error', function(){
+  console.log(err);
+
+});
 
 //init app
 const app = express();
+//Bringing in model
+let Article = require('./models/article');
 
 //load view engine 
 app.set('views', path.join(__dirname, 'views'));
@@ -10,30 +27,17 @@ app.set('view engine', 'ejs');
 
 //Home Route
 app.get('/', function(req, res){
-  let articles = [
-    {
-      id:1,
-      title:'One',
-      author:'Brad',
-      body: 'One One'
-    },
-    {
-      id:2,
-      title:'Two',
-      author:'Brad',
-      body: 'One One'
-    },    
-    {
-      id:3,
-      title:'Three',
-      author:'Brad',
-      body: 'One One'
+  Article.find({}, function(err, articles){
+    if (err){
+      console.log(err);
+    }else {
+      console.log('else');
+      res.render('index', {
+        title: 'Articles',
+        articles: articles
+      });
     }
-  ];
-  res.render('index', {
-    title: 'Hello Mike',
-    articles: articles
-  })
+  });
 });
 
 //Add route 
