@@ -2,8 +2,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/simple_project');
+mongoose.connect('mongodb://localhost/nodekb');
 let db = mongoose.connection;
+
+console.log(db)
 
 //Check Connection
 db.once('open', function(){
@@ -13,12 +15,12 @@ db.once('open', function(){
 //Checking for DB errors
 db.on('error', function(){
   console.log(err);
-
 });
 
 //init app
 const app = express();
-//Bringing in model
+
+//Bringing in the model
 let Article = require('./models/article');
 
 //load view engine 
@@ -27,11 +29,12 @@ app.set('view engine', 'ejs');
 
 //Home Route
 app.get('/', function(req, res){
+
   Article.find({}, function(err, articles){
     if (err){
       console.log(err);
     }else {
-      console.log('else');
+      console.log(articles);
       res.render('index', {
         title: 'Articles',
         articles: articles
