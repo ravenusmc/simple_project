@@ -1,15 +1,20 @@
 <% include partials/layout %>
 
-  <h1 class='center'><%= title %></h1>
+  <header>
+    <h1 class='main_title center'><%= title %></h1>
+  </header>
 
-  
-  <ul>
-    <% for(var i = 0; i < articles.length; i++) { %>
-      <li><%= articles[i].author %></li>
-      <li><%= articles[i].title %></li>
-      <li><%= articles[i].body %></li>
-      <hr>
-    <% } %>
-  </ul>
+  <main class='list_container'>
+    <div>
+      <ul>
+        <% for(var i = 0; i < articles.length; i++) { %>
+          <h2>Article <%= i + 1  %>:</h2>
+          <li><%= articles[i].author %></li>
+          <li><%= articles[i].title %></li>
+          <li><%= articles[i].body %></li>
+        <% } %>
+      </ul>
+    </div>
+  </main>
 
 <% include partials/footer %>
