@@ -2,3 +2,34 @@
 .center {
   text-align: center;
 }
+
+/* CSS for Header   #AD0AE6 #E6AD0A */
+nav {
+  background-color: #09e5ae;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+nav ul  {
+  text-align: right;
+}
+
+nav ul li {
+    display: inline;
+    padding-right: 40px;
+}
+
+nav ul a {
+  display: inline;
+  text-decoration: none;
+  color: #AD0AE6;
+  font-size: 30px;
+}
+
+nav ul a:hover {
+  background-color: #E6AD0A;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
