@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/nodekb');
 let db = mongoose.connection;
-
-console.log(db)
+//Bringing in the model
+let Article = require('./models/article');
 
 //Check Connection
 db.once('open', function(){
@@ -20,8 +21,12 @@ db.on('error', function(){
 //init app
 const app = express();
 
-//Bringing in the model
-let Article = require('./models/article');
+//Bringing in body parser Middleware
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+
 
 //load view engine 
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +39,6 @@ app.get('/', function(req, res){
     if (err){
       console.log(err);
     }else {
-      console.log(articles);
       res.render('index', {
         title: 'Articles',
         articles: articles
@@ -48,7 +52,57 @@ app.get('/articles/add', function(req,res){
   res.render('add', {title: 'add article'})
 });
 
+//add Submit Post Route
+app.post('/articles/add', function(req,res){
+  let article = new Article();
+  article.title = req.body.title;
+  article.author = req.body.author;
+  article.body = req.body.body;
+
+  article.save(function(err){
+    if (err){
+      console.log(err);
+      return;
+    }else {
+      res.redirect('/');
+    }
+  });
+});
+
 //Start Server
 app.listen(3000, function(){
   console.log('Server Started on port 3000...')
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

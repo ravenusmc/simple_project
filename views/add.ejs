@@ -1,3 +1,9 @@
 <% include layout %>
 
   <h1><%= title %></h1>
+  <form method='POST' action='/articles/add'>
+    <label>Title:<input name='title', type='text'/></label><br>
+    <label>Author:<input name='author', type='text'/></label><br>
+    <label>Body:<input name='body'/></label><br><br>
+    <button type='submit', value='Submit'>Submit</button>
+  </form>
