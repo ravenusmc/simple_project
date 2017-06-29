@@ -53,6 +53,15 @@ app.get('/articles/add', function(req,res){
   res.render('add', {title: 'add article'})
 });
 
+//Get Single Article:
+app.get('/article/:id', function(req, res){
+  Article.findById(req.params.id, function(err, article){
+    res.render('article', {
+      article: article
+    });
+  });
+});
+
 //add Submit Post Route
 app.post('/articles/add', function(req,res){
   let article = new Article();

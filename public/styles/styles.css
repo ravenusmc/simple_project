@@ -36,6 +36,17 @@ nav ul a:hover {
   border-radius: 8px;
 }
 
+/* CSS for Footer */
+footer {
+  background-color: #09e5ae;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 200px;
+}
+
 /* CSS for home page */
 
 .list_container {
