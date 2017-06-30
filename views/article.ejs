@@ -1,10 +1,13 @@
 <% include partials/layout %>
 
-<h1 class='center'><%= article.title %></h1>
-<h5 class='center'>Written By: <%= article.author %></h5>
-<p class='center'><%= article.body %></p>
-<hr>
-<button><a href='/article/edit/<%= article._id %>'>Edit</a></button>
-<button><a class='delete-article' href='#' data-id='<%= article._id %>'>Delete</a></button>
+<div class='article_page'>
+  <h1><%= article.title %></h1>
+  <h5>Written By: <%= article.author %></h5>
+  <p>Article Body: <%= article.body %></p>
+  <div>
+    <button><a class='fix_link' href='/article/edit/<%= article._id %>'>Edit</a></button>
+    <button><a class='fix_link delete-article' href='#' data-id='<%= article._id %>'>Delete</a></button>
+  </div>
+</div>
 
 <% include partials/footer %>
