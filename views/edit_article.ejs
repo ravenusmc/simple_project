@@ -1,0 +1,9 @@
+<% include partials/layout %>
+
+
+  <form method='POST' action='/articles/edit/<%= article._id %>'>
+    <label>Title:<input name='title', type='text' value='<%= article.title %>'/></label><br>
+    <label>Author:<input name='author', type='text' value='<%= article.author %>'/></label><br>
+    <label>Body:<input name='body' value='<%= article.body %>'/></label><br><br>
+    <button type='submit', value='Submit'>Update</button>
+  </form>

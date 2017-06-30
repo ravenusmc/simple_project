@@ -3,7 +3,8 @@
 <h1 class='center'><%= article.title %></h1>
 <h5 class='center'>Written By: <%= article.author %></h5>
 <p class='center'><%= article.body %></p>
-
-
+<hr>
+<button><a href='/article/edit/<%= article._id %>'>Edit</a></button>
+<button><a class='delete-article' href='#' data-id='<%= article._id %>'>Delete</a></button>
 
 <% include partials/footer %>
