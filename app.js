@@ -9,6 +9,7 @@ const session = require('express-session');
 //init app
 const app = express();
 
+//Model code
 mongoose.connect('mongodb://localhost/nodekb');
 let db = mongoose.connection;
 //Bringing in the model
@@ -23,6 +24,8 @@ db.once('open', function(){
 db.on('error', function(){
   console.log(err);
 });
+
+//End of Model Code 
 
 //Bringing in body parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -70,7 +73,6 @@ app.use(expressValidator({
 
 //Home Route
 app.get('/', function(req, res){
-
   Article.find({}, function(err, articles){
     if (err){
       console.log(err);
@@ -85,7 +87,9 @@ app.get('/', function(req, res){
 
 //Route files 
 let articles = require('./routes/articles');
+let users = require('./routes/users');
 app.use('/articles', articles);
+app.use('/users', users);
 
 
 //Start Server

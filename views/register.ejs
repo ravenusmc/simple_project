@@ -1,0 +1,13 @@
+<% include partials/layout %>
+
+  <h1>Users</h1>
+  <form method='POST' action='/users/register'>
+    <label>Name:<input name='name', type='text'/></label><br>
+    <label>Email:<input name='email', type='text'/></label><br>
+    <label>Username:<input name='body', type='text'/></label><br><br>
+    <label>Password:<input name='password', type='password'/></label><br><br>
+    <label>Confirm Password:<input name='password2', type='password'/></label><br><br>
+    <button type='submit', value='Submit'>Submit</button>
+  </form>
+
+<% include partials/footer %>
