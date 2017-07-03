@@ -67,6 +67,19 @@ footer {
 }
 
 
+label {
+  float: left;
+  display: block;
+  width: 8em;
+  padding-right: 1em;
+}
+
+input {
+  display: block;
+  margin-bottom: 1em;
+}
+
+
 /* CSS for home page */
 
 .list_container {
