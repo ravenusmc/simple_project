@@ -1,10 +1,12 @@
 <% include partials/layout %>
 
-  <h1>Login</h1>
-  <form method='POST' action='/users/login'>
-    <label>Username:<input name='username', type='text'/></label><br><br>
-    <label>Password:<input name='password', type='password'/></label><br><br>
+  <div class='login_container'>
+    <h1>Login</h1>
+    <form class='login_form' method='POST' action='/users/login'>
+      <label>Username:<input name='username', type='text'/></label><br><br>
+      <label>Password:<input name='password', type='password'/></label><br><br>
+    </form>
     <button type='submit', value='Submit'>Submit</button>
-  </form>
+  </div>
 
 <% include partials/footer %>

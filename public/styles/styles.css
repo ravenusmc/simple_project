@@ -58,6 +58,15 @@ footer {
   margin-top: 200px;
 }
 
+/* CSS for login page */
+.login_container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 /* CSS for home page */
 
 .list_container {
