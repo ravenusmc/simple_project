@@ -9,7 +9,9 @@
   <nav>
     <ul>
       <li><a href='/'>Home</a></li>&nbsp;&nbsp;
-      <li><a href='/articles/add'>Add Article</a></li>
+      <% if (user) { %>
+        <li><a href='/articles/add'>Add Article</a></li>
+      <% } %>
       <% if (user) { %>
         <li><a href="/users/logout">Logout</a></li>
       <%} else {%>

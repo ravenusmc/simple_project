@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-//Bringing in the model
-let Article = require('../models/article');
+//Bringing in the models
+let Article = require('../models/article'); //article model
+let User = require('../models/user'); //user model
 
 router.get('/add', function(req,res){
   res.render('add', {title: 'add article'})
@@ -11,17 +12,20 @@ router.get('/add', function(req,res){
 //Get Single Article:
 router.get('/:id', function(req, res){
   Article.findById(req.params.id, function(err, article){
-    res.render('article', {
-      article: article
+    User.findById(article.author, function(err,user){
+      res.render('article', {
+        article: article, 
+        author: user.name
+      });
     });
   });
 });
 
 //add Submit Post Route
-router.post('/add', function(req,res){
+router.post('/add', ensureAuthenticated, function(req,res){
   //validating 
   req.checkBody('title', 'Title is Required').notEmpty();
-  req.checkBody('author', 'Author is Required').notEmpty();
+  //req.checkBody('author', 'Author is Required').notEmpty();
   req.checkBody('body', 'Body is Required').notEmpty();
 
   //Get Errors
@@ -34,7 +38,7 @@ router.post('/add', function(req,res){
   }else{
     let article = new Article();
     article.title = req.body.title;
-    article.author = req.body.author;
+    article.author = req.user._id;
     article.body = req.body.body;
 
     article.save(function(err){
@@ -61,7 +65,7 @@ router.get('/edit/:id', function(req, res){
 });
 
 //Update Articles
-router.post('/edit/:id', function(req,res){
+router.post('/edit/:id', ensureAuthenticated, function(req,res){
   let article = {};
   article.title = req.body.title;
   article.author = req.body.author;
@@ -92,4 +96,52 @@ router.delete('/:id', function(req, res){
     });
 });
 
+//Access Control 
+function ensureAuthenticated(req, res, next){
+  if (req.isAuthenticated()){
+    return next();
+  }else{
+    req.flash('Danger', 'Please Login');
+    res.redirect('/users/login');
+  }
+}
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
