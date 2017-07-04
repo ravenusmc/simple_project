@@ -58,6 +58,10 @@ router.post('/add', ensureAuthenticated, function(req,res){
 //Load Edit Form
 router.get('/edit/:id', function(req, res){
   Article.findById(req.params.id, function(err, article){
+    if (article.author != req.user._id){
+      req.flash('danger', 'Not Allowed');
+      res.redirect('/');
+    }
     res.render('edit_article', {
       article: article
     });
@@ -86,13 +90,23 @@ router.post('/edit/:id', ensureAuthenticated, function(req,res){
 
 //Deleting route-Don't forget to add in the ajax request
 router.delete('/:id', function(req, res){
+    if(!req.user._id){
+      res.status(500).send();
+    }
+
     let query = {_id:req.params.id};
 
-    Article.remove(query, function(err){
-      if (err){
-        console.log(err);
+    Article.findById(req.params.id, function(err, article){
+      if(article.author != req.user._id){
+        res.status(500).send();
+      }else{
+        Article.remove(query, function(err){
+          if (err){
+            console.log(err);
+          }
+          res.send('Success!');
+        });
       }
-      res.send('Success!');
     });
 });
 
